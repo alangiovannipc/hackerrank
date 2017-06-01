@@ -10,6 +10,9 @@ import java.util.regex.*;
 public class TheMaximunSubArray {
 
     public static void main(String[] args) {
+
+
+
         int num_test;
         int result[][];
         int i,j,num;
@@ -27,21 +30,22 @@ public class TheMaximunSubArray {
 
             if (array_length<=0) { continue; }
 
-            for(j=0;j<array_length;j++) {
-                num = in.nextInt();
-                max_temp += num;
+            num = in.nextInt();
+            max_temp = num;
+            max_sub_arr_cont = num;
 
-                if (max_temp>=max_sub_arr_cont && max_temp>num) {
-                    max_sub_arr_cont = max_temp;
-                } else if(num>=max_temp) {
-                    max_sub_arr_cont = num;
-                }
+            for(j=1;j<array_length;j++) {
+
+                num = in.nextInt();
+
+                max_sub_arr_cont = Math.max(num,max_sub_arr_cont + num);
+                max_temp = Math.max(max_temp,max_sub_arr_cont);
 
                 if (num>0) {
                     max_sub_arr_no_cont += num;
                 }
 
-                if(num>min_neg) {
+                if(num>min_neg && num<0) {
                     min_neg = num;
                 }
             }
@@ -55,10 +59,7 @@ public class TheMaximunSubArray {
             }
 
 
-
-            max_sub_arr_cont = 0;
             max_sub_arr_no_cont = 0;
-            max_temp = 0;
             min_neg = Integer.MIN_VALUE;
         }
 
